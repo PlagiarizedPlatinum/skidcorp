@@ -8,10 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.9.5",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
+    "@neondatabase/serverless": "^0.9.3",
     "slugify": "^1.6.6"
   },
   "devDependencies": {

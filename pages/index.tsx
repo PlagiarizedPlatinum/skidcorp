@@ -2,14 +2,14 @@ import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { getDb } from '../lib/db';
 
-interface dox {
+interface Story {
   id: number;
   title: string;
   slug: string;
   created_at: string;
 }
 
-export default function Home({ dox }: { dox: dox[] }) {
+export default function Home({ dox }: { dox: Story[] }) {
   return (
     <div className="page-center" style={{ gap: '1.5rem' }}>
       <h1 className="title">Skidcorp</h1>
@@ -18,13 +18,13 @@ export default function Home({ dox }: { dox: dox[] }) {
         <a href="https://discord.gg/bX8jXpvdAK" target="_blank" rel="noreferrer" className="btn">
           Discord
         </a>
-        <Link href="/dox" className="btn">dox</Link>
+        <Link href="/dox" className="btn">Stories</Link>
       </div>
 
       {dox.length > 0 && (
         <div style={{ marginTop: '3rem', width: '100%', maxWidth: '680px' }}>
           <p style={{ textAlign: 'center', fontSize: '0.7rem', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--dim)', marginBottom: '1.2rem' }}>
-            Latest dox
+            Latest Stories
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {dox.slice(0, 3).map(s => (

@@ -29,8 +29,8 @@
 - Visit `yoursite.com/admin`
 - Enter your `ADMIN_PASSWORD`
 - Write a title + content → hit **Publish**
-- Each dox gets its own URL: `/dox/my-dox-title`
-- You can view or delete dox from the admin panel
+- Each story gets its own URL: `/stories/my-story-title`
+- You can view or delete stories from the admin panel
 
 ## Local Development
 
