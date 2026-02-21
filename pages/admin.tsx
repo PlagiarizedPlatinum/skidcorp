@@ -174,7 +174,7 @@ export default function Admin() {
       {dox.length > 0 && (
         <>
           <h2 style={{ fontSize: '0.7rem', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--dim)', marginBottom: '1rem' }}>
-            Published Dox<
+            Published Dox
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {dox.map(s => (
