@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-interface Story {
+interface dox {
   id: number;
   title: string;
   slug: string;
@@ -20,7 +20,7 @@ export default function Admin() {
   const [postMsg, setPostMsg] = useState('');
   const [postError, setPostError] = useState('');
 
-  const [doxes, setdoxes] = useState<Story[]>([]);
+  const [dox, setdox] = useState<dox[]>([]);
   const [deleting, setDeleting] = useState<number | null>(null);
 
   const sessionKey = 'skidcorp_admin_token';
@@ -29,16 +29,16 @@ export default function Admin() {
     const token = sessionStorage.getItem(sessionKey);
     if (token) {
       setAuthed(true);
-      fetchdoxes(token);
+      fetchdox(token);
     }
   }, []);
 
-  async function fetchdoxes(token?: string) {
+  async function fetchdox(token?: string) {
     const t = token || sessionStorage.getItem(sessionKey) || '';
-    const res = await fetch('/api/admin/doxes', { headers: { 'x-admin-token': t } });
+    const res = await fetch('/api/admin/dox', { headers: { 'x-admin-token': t } });
     if (res.ok) {
       const data = await res.json();
-      setdoxes(data.doxes);
+      setdox(data.dox);
     }
   }
 
@@ -55,7 +55,7 @@ export default function Admin() {
     if (res.ok) {
       sessionStorage.setItem(sessionKey, password);
       setAuthed(true);
-      fetchdoxes(password);
+      fetchdox(password);
     } else {
       setAuthError('Wrong password.');
     }
@@ -75,10 +75,10 @@ export default function Admin() {
     setPosting(false);
     if (res.ok) {
       const data = await res.json();
-      setPostMsg(`Published! View at /doxes/${data.slug}`);
+      setPostMsg(`Published! View at /dox/${data.slug}`);
       setTitle('');
       setContent('');
-      fetchdoxes();
+      fetchdox();
     } else {
       const err = await res.json();
       setPostError(err.error || 'Failed to publish.');
@@ -86,7 +86,7 @@ export default function Admin() {
   }
 
   async function handleDelete(id: number) {
-    if (!confirm('Delete this story?')) return;
+    if (!confirm('Delete this dox?')) return;
     setDeleting(id);
     const token = sessionStorage.getItem(sessionKey) || '';
     await fetch(`/api/admin/delete?id=${id}`, {
@@ -94,7 +94,7 @@ export default function Admin() {
       headers: { 'x-admin-token': token },
     });
     setDeleting(null);
-    fetchdoxes();
+    fetchdox();
   }
 
   function handleLogout() {
@@ -135,12 +135,12 @@ export default function Admin() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
         <div style={{ display: 'flex', gap: '0.8rem' }}>
           <Link href="/" className="btn" style={{ fontSize: '0.72rem' }}>← Home</Link>
-          <Link href="/doxes" className="btn" style={{ fontSize: '0.72rem' }}>doxes</Link>
+          <Link href="/dox" className="btn" style={{ fontSize: '0.72rem' }}>dox</Link>
         </div>
         <button onClick={handleLogout} className="btn" style={{ fontSize: '0.72rem' }}>Logout</button>
       </div>
 
-      <h1 className="subtitle">Publish Story</h1>
+      <h1 className="subtitle">Publish dox</h1>
 
       <form onSubmit={handlePost} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '4rem' }}>
         <div className="field">
@@ -149,7 +149,7 @@ export default function Admin() {
             type="text"
             value={title}
             onChange={e => setTitle(e.target.value)}
-            placeholder="Story title (also becomes the URL slug)"
+            placeholder="dox title (also becomes the URL slug)"
             required
           />
         </div>
@@ -158,7 +158,7 @@ export default function Admin() {
           <textarea
             value={content}
             onChange={e => setContent(e.target.value)}
-            placeholder="Write your story here..."
+            placeholder="Write your dox here..."
             required
           />
         </div>
@@ -171,13 +171,13 @@ export default function Admin() {
         </button>
       </form>
 
-      {doxes.length > 0 && (
+      {dox.length > 0 && (
         <>
           <h2 style={{ fontSize: '0.7rem', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--dim)', marginBottom: '1rem' }}>
-            Published doxes
+            Published dox
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            {doxes.map(s => (
+            {dox.map(s => (
               <div key={s.id} style={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -193,11 +193,11 @@ export default function Admin() {
                     {s.title}
                   </p>
                   <p style={{ fontSize: '0.72rem', color: 'var(--dim)', letterSpacing: '1px' }}>
-                    /doxes/{s.slug} · {new Date(s.created_at).toLocaleDateString()}
+                    /dox/{s.slug} · {new Date(s.created_at).toLocaleDateString()}
                   </p>
                 </div>
                 <div style={{ display: 'flex', gap: '0.6rem', flexShrink: 0 }}>
-                  <Link href={`/doxes/${s.slug}`} className="btn" style={{ fontSize: '0.72rem', padding: '0.5em 1em' }}>View</Link>
+                  <Link href={`/dox/${s.slug}`} className="btn" style={{ fontSize: '0.72rem', padding: '0.5em 1em' }}>View</Link>
                   <button
                     onClick={() => handleDelete(s.id)}
                     disabled={deleting === s.id}

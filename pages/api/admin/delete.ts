@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const sql = getDb();
-    await sql`DELETE FROM doxes WHERE id = ${id}`;
+    await sql`DELETE FROM dox WHERE id = ${id}`;
     return res.status(200).json({ ok: true });
   } catch {
     return res.status(500).json({ error: 'Database error.' });

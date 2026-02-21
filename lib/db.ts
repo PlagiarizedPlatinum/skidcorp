@@ -8,7 +8,7 @@ export function getDb() {
 export async function initDb() {
   const sql = getDb();
   await sql`
-    CREATE TABLE IF NOT EXISTS doxes (
+    CREATE TABLE IF NOT EXISTS dox (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL,
       slug TEXT NOT NULL UNIQUE,

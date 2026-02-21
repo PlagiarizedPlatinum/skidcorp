@@ -2,30 +2,30 @@ import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { getDb } from '../../lib/db';
 
-interface Story {
+interface dox {
   id: number;
   title: string;
   slug: string;
   created_at: string;
 }
 
-export default function doxesIndex({ doxes }: { doxes: Story[] }) {
+export default function doxIndex({ dox }: { dox: dox[] }) {
   return (
     <div style={{ maxWidth: '760px', width: '90%', margin: '0 auto', padding: '4rem 0' }}>
       <div style={{ marginBottom: '3rem' }}>
         <Link href="/" className="btn" style={{ fontSize: '0.75rem' }}>← Home</Link>
       </div>
 
-      <h1 className="subtitle">doxes</h1>
+      <h1 className="subtitle">dox</h1>
 
-      {doxes.length === 0 ? (
+      {dox.length === 0 ? (
         <p style={{ color: 'var(--dim)', fontStyle: 'italic', fontSize: '0.9rem', letterSpacing: '1px' }}>
-          No doxes published yet...
+          No dox published yet...
         </p>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-          {doxes.map(s => (
-            <Link key={s.id} href={`/doxes/${s.slug}`} style={{
+          {dox.map(s => (
+            <Link key={s.id} href={`/dox/${s.slug}`} style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
@@ -61,12 +61,12 @@ export default function doxesIndex({ doxes }: { doxes: Story[] }) {
 export const getStaticProps: GetStaticProps = async () => {
   try {
     const sql = getDb();
-    const doxes = await sql`SELECT id, title, slug, created_at FROM doxes ORDER BY created_at DESC`;
+    const dox = await sql`SELECT id, title, slug, created_at FROM dox ORDER BY created_at DESC`;
     return {
-      props: { doxes: doxes.map(s => ({ ...s, created_at: s.created_at.toISOString() })) },
+      props: { dox: dox.map(s => ({ ...s, created_at: s.created_at.toISOString() })) },
       revalidate: 30,
     };
   } catch {
-    return { props: { doxes: [] }, revalidate: 30 };
+    return { props: { dox: [] }, revalidate: 30 };
   }
 };

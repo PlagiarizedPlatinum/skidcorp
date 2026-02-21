@@ -25,21 +25,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const sql = getDb();
 
     let slug = slugify(title);
-    if (!slug) slug = `story-${Date.now()}`;
+    if (!slug) slug = `dox-${Date.now()}`;
 
     // Ensure unique slug
-    const existing = await sql`SELECT id FROM doxes WHERE slug = ${slug}`;
+    const existing = await sql`SELECT id FROM dox WHERE slug = ${slug}`;
     if (existing.length > 0) {
       slug = `${slug}-${Date.now()}`;
     }
 
-    const [story] = await sql`
-      INSERT INTO doxes (title, slug, content)
+    const [dox] = await sql`
+      INSERT INTO dox (title, slug, content)
       VALUES (${title.trim()}, ${slug}, ${content.trim()})
       RETURNING id, slug
     `;
 
-    return res.status(200).json({ id: story.id, slug: story.slug });
+    return res.status(200).json({ id: dox.id, slug: dox.slug });
   } catch (err: any) {
     console.error(err);
     return res.status(500).json({ error: 'Database error.' });

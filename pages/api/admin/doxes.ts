@@ -8,8 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const sql = getDb();
-    const doxes = await sql`SELECT id, title, slug, created_at FROM doxes ORDER BY created_at DESC`;
-    return res.status(200).json({ doxes: doxes.map(s => ({ ...s, created_at: s.created_at.toISOString() })) });
+    const dox = await sql`SELECT id, title, slug, created_at FROM dox ORDER BY created_at DESC`;
+    return res.status(200).json({ dox: dox.map(s => ({ ...s, created_at: s.created_at.toISOString() })) });
   } catch (err) {
     return res.status(500).json({ error: 'Database error.' });
   }

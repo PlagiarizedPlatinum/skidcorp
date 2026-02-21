@@ -2,14 +2,14 @@ import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { getDb } from '../lib/db';
 
-interface Story {
+interface dox {
   id: number;
   title: string;
   slug: string;
   created_at: string;
 }
 
-export default function Home({ doxes }: { doxes: Story[] }) {
+export default function Home({ dox }: { dox: dox[] }) {
   return (
     <div className="page-center" style={{ gap: '1.5rem' }}>
       <h1 className="title">Skidcorp</h1>
@@ -18,17 +18,17 @@ export default function Home({ doxes }: { doxes: Story[] }) {
         <a href="https://discord.gg/bX8jXpvdAK" target="_blank" rel="noreferrer" className="btn">
           Discord
         </a>
-        <Link href="/doxes" className="btn">doxes</Link>
+        <Link href="/dox" className="btn">dox</Link>
       </div>
 
-      {doxes.length > 0 && (
+      {dox.length > 0 && (
         <div style={{ marginTop: '3rem', width: '100%', maxWidth: '680px' }}>
           <p style={{ textAlign: 'center', fontSize: '0.7rem', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--dim)', marginBottom: '1.2rem' }}>
-            Latest doxes
+            Latest dox
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            {doxes.slice(0, 3).map(s => (
-              <Link key={s.id} href={`/doxes/${s.slug}`} style={{
+            {dox.slice(0, 3).map(s => (
+              <Link key={s.id} href={`/dox/${s.slug}`} style={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
@@ -59,12 +59,12 @@ export default function Home({ doxes }: { doxes: Story[] }) {
 export const getStaticProps: GetStaticProps = async () => {
   try {
     const sql = getDb();
-    const doxes = await sql`SELECT id, title, slug, created_at FROM doxes ORDER BY created_at DESC LIMIT 3`;
+    const dox = await sql`SELECT id, title, slug, created_at FROM dox ORDER BY created_at DESC LIMIT 3`;
     return {
-      props: { doxes: doxes.map(s => ({ ...s, created_at: s.created_at.toISOString() })) },
+      props: { dox: dox.map(s => ({ ...s, created_at: s.created_at.toISOString() })) },
       revalidate: 30,
     };
   } catch {
-    return { props: { doxes: [] }, revalidate: 30 };
+    return { props: { dox: [] }, revalidate: 30 };
   }
 };
