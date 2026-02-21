@@ -86,7 +86,7 @@ export default function Admin() {
   }
 
   async function handleDelete(id: number) {
-    if (!confirm('Delete this story?')) return;
+    if (!confirm('Delete this dox?')) return;
     setDeleting(id);
     const token = sessionStorage.getItem(sessionKey) || '';
     await fetch(`/api/admin/delete?id=${id}`, {
@@ -135,12 +135,12 @@ export default function Admin() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
         <div style={{ display: 'flex', gap: '0.8rem' }}>
           <Link href="/" className="btn" style={{ fontSize: '0.72rem' }}>← Home</Link>
-          <Link href="/dox" className="btn" style={{ fontSize: '0.72rem' }}>Stories</Link>
+          <Link href="/dox" className="btn" style={{ fontSize: '0.72rem' }}>Dox</Link>
         </div>
         <button onClick={handleLogout} className="btn" style={{ fontSize: '0.72rem' }}>Logout</button>
       </div>
 
-      <h1 className="subtitle">Publish Story</h1>
+      <h1 className="subtitle">Publish Dox</h1>
 
       <form onSubmit={handlePost} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '4rem' }}>
         <div className="field">
@@ -149,7 +149,7 @@ export default function Admin() {
             type="text"
             value={title}
             onChange={e => setTitle(e.target.value)}
-            placeholder="Story title (also becomes the URL slug)"
+            placeholder="Dox title (also becomes the URL slug)"
             required
           />
         </div>
@@ -158,7 +158,7 @@ export default function Admin() {
           <textarea
             value={content}
             onChange={e => setContent(e.target.value)}
-            placeholder="Write your story here..."
+            placeholder="Write your dox here..."
             required
           />
         </div>
@@ -174,7 +174,7 @@ export default function Admin() {
       {dox.length > 0 && (
         <>
           <h2 style={{ fontSize: '0.7rem', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--dim)', marginBottom: '1rem' }}>
-            Published Stories
+            Published Dox<
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {dox.map(s => (

@@ -13,15 +13,15 @@ interface Story {
 export default function StoryPage({ story }: { story: Story }) {
   if (!story) return (
     <div className="page-center">
-      <h1 style={{ fontSize: '2rem', color: 'var(--dim)' }}>Story not found.</h1>
-      <Link href="/dox" className="btn" style={{ marginTop: '2rem' }}>← All Stories</Link>
+      <h1 style={{ fontSize: '2rem', color: 'var(--dim)' }}>Dox not found.</h1>
+      <Link href="/dox" className="btn" style={{ marginTop: '2rem' }}>← All Dox</Link>
     </div>
   );
 
   return (
     <div style={{ maxWidth: '760px', width: '90%', margin: '0 auto', padding: '4rem 0 6rem' }}>
       <div style={{ marginBottom: '3rem', display: 'flex', gap: '1rem' }}>
-        <Link href="/dox" className="btn" style={{ fontSize: '0.75rem' }}>← All Stories</Link>
+        <Link href="/dox" className="btn" style={{ fontSize: '0.75rem' }}>← All Dox</Link>
         <Link href="/" className="btn" style={{ fontSize: '0.75rem' }}>Home</Link>
       </div>
 

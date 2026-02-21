@@ -18,13 +18,13 @@ export default function Home({ dox }: { dox: Story[] }) {
         <a href="https://discord.gg/bX8jXpvdAK" target="_blank" rel="noreferrer" className="btn">
           Discord
         </a>
-        <Link href="/dox" className="btn">Stories</Link>
+        <Link href="/dox" className="btn">Dox</Link>
       </div>
 
       {dox.length > 0 && (
         <div style={{ marginTop: '3rem', width: '100%', maxWidth: '680px' }}>
           <p style={{ textAlign: 'center', fontSize: '0.7rem', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--dim)', marginBottom: '1.2rem' }}>
-            Latest Stories
+            Latest Dox
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {dox.slice(0, 3).map(s => (

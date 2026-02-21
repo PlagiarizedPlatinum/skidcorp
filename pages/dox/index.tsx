@@ -16,7 +16,7 @@ export default function StoriesIndex({ dox }: { dox: Story[] }) {
         <Link href="/" className="btn" style={{ fontSize: '0.75rem' }}>← Home</Link>
       </div>
 
-      <h1 className="subtitle">Stories</h1>
+      <h1 className="subtitle">Dox</h1>
 
       {dox.length === 0 ? (
         <p style={{ color: 'var(--dim)', fontStyle: 'italic', fontSize: '0.9rem', letterSpacing: '1px' }}>
