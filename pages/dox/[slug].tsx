@@ -1,6 +1,6 @@
-import Link from ‘next/link’;
-import { GetStaticPaths, GetStaticProps } from ‘next’;
-import { getDb } from ‘../../lib/db’;
+import Link from 'next/link';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { getDb } from '../../lib/db';
 
 interface Story {
 id: number;
